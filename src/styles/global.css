@@ -18,6 +18,18 @@ html {
   font-family: "Open Sans", system-ui, sans-serif;
 }
 
+hr {
+	border: 0;
+	border-top: 1px solid #e6e2da;
+	margin: 2rem 0;
+}
+
+time,
+.date {
+	color: #6f6f68;
+}
+
+
 body {
   margin: 0;
   font-size: 16px;
