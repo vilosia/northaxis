@@ -3,17 +3,15 @@ import { SITE_TITLE } from '../consts';
 import HeaderLink from './HeaderLink.astro';
 ---
 
-<header>
-	<nav>
-		<h2><a href="/">{SITE_TITLE}</a></h2>
-		<div class="internal-links">
-			<HeaderLink href="/">Home</HeaderLink>
-			<HeaderLink href="/blog">Essays</HeaderLink>
-			<HeaderLink href="/about">About</HeaderLink>
-		</div>
-		
-	</nav>
+<header class="header">
+  <a href="/" class="logo">NorthAxis</a>
+
+  <nav class="nav">
+    <a href="/notes">Notes</a>
+    <a href="/about">About</a>
+  </nav>
 </header>
+
 <style>
 	header {
 		margin: 0;
