@@ -3,27 +3,16 @@ const today = new Date();
 ---
 
 <footer>
-	&copy; {today.getFullYear()} NorthAxis. All rights reserved.
-	
+  © {today.getFullYear()} NorthAxis. All rights reserved.
 </footer>
+
 <style>
-	footer {
-		padding: 2em 1em 2em 1em;
-		background: linear-gradient(var(--gray-gradient)) no-repeat;
-		color: rgb(var(--gray));
-		text-align: right;
-	}
-	.social-links {
-		display: flex;
-		justify-content: center;
-		gap: 1em;
-		margin-top: 1em;
-	}
-	.social-links a {
-		text-decoration: none;
-		color: rgb(var(--gray));
-	}
-	.social-links a:hover {
-		color: rgb(var(--gray-dark));
-	}
+footer {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 3rem;
+  color: rgb(var(--gray));
+  text-align: left;
+  font-size: 0.9rem;
+}
 </style>
