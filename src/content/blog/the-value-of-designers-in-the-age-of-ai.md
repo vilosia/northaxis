@@ -2,7 +2,7 @@
 title: 'The Value of Designers in the Age of AI'
 description: 'Why AI is changing what makes designers valuable.'
 pubDate: 'Jun 07 2026'
-----------------------
+---
 
 For the past two years, one question has appeared again and again:
 
