@@ -1,4 +1,5 @@
 ---
+
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
@@ -8,115 +9,137 @@ import Header from '../components/Header.astro';
 
 type Props = CollectionEntry<'blog'>['data'];
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
----
+## const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 
 <html lang="en">
 	<head>
 		<BaseHead title={title} description={description} />
 
-		<style>
-			main {
-				max-width: 760px;
-				margin: 0 auto;
-				padding: 2rem 1.5rem 4rem;
-			}
+```
+	<style>
+		main {
+			max-width: 660px;
+			margin: 0 auto;
+			padding: 3rem 1.5rem 5rem;
+		}
 
-			.hero-image {
-				margin-bottom: 2rem;
-			}
+		.hero-image {
+			margin-bottom: 2rem;
+		}
 
-			.hero-image img {
-				display: block;
-				width: 100%;
-				max-width: 100%;
-				height: auto;
-				border-radius: 8px;
-			}
+		.hero-image img {
+			display: block;
+			width: 100%;
+			max-width: 100%;
+			height: auto;
+			border-radius: 8px;
+		}
 
-			.prose {
-				width: 100%;
-				color: rgb(var(--gray-dark));
-			}
+		.prose {
+			width: 100%;
+			color: rgb(var(--gray-dark));
+		}
 
-			.title {
-				text-align: left;
-				margin-bottom: 2rem;
-			}
+		.title {
+			text-align: left;
+			margin-bottom: 2rem;
+		}
 
-			.title h1 {
-				margin: 0 0 0.75rem;
-				font-size: clamp(2rem, 5vw, 3rem);
-				line-height: 1.15;
-				letter-spacing: -0.03em;
-				text-align: left;
-			}
+		.title h1 {
+			margin: 0 0 0.4rem;
+			font-size: 1.85rem;
+			line-height: 1.2;
+			letter-spacing: -0.03em;
+			font-weight: 600;
+			text-align: left;
+		}
 
-			.date {
-				color: rgb(var(--gray));
-				font-size: 0.95rem;
-				margin-bottom: 1rem;
-				text-align: left;
-			}
+		.date {
+			color: #8c8c8c;
+			font-size: 0.85rem;
+			margin-bottom: 0.9rem;
+			text-align: left;
+		}
 
-			hr {
-				border: 0;
-				border-top: 1px solid rgba(var(--gray), 20%);
-				margin: 0;
-			}
+		hr {
+			border: 0;
+			border-top: 1px solid #E9E8E8;
+			margin: 0;
+		}
 
-			.prose img {
-				display: block;
-				width: 100%;
-				max-width: 100%;
-				height: auto;
-				margin: 2rem 0;
-				border-radius: 8px;
-			}
+		.prose img {
+			display: block;
+			width: 100%;
+			max-width: 100%;
+			height: auto;
+			margin: 2rem 0;
+			border-radius: 8px;
+		}
 
-			.prose p {
-				line-height: 1.8;
-				margin-bottom: 1.5rem;
-				text-align: left;
-			}
-		</style>
-	</head>
+		.prose p {
+			line-height: 1.8;
+			margin-bottom: 1.5rem;
+			text-align: left;
+		}
 
-	<body>
-		<Header />
+		.prose h2 {
+			margin-top: 3rem;
+			margin-bottom: 1rem;
+			font-size: 1.35rem;
+			line-height: 1.35;
+			letter-spacing: -0.02em;
+			font-weight: 600;
+		}
 
-		<main>
-			<article>
-				{heroImage && (
-					<div class="hero-image">
-						<Image src={heroImage} alt="" />
-					</div>
-				)}
+		.prose ul,
+		.prose ol {
+			margin-bottom: 1.5rem;
+			padding-left: 1.5rem;
+		}
 
-				<div class="prose">
-					<div class="title">
-						<h1>{title}</h1>
+		.prose li {
+			margin-bottom: 0.5rem;
+		}
+	</style>
+</head>
 
-						<div class="date">
-							<FormattedDate date={pubDate} />
+<body>
+	<Header />
 
-							{
-								updatedDate && (
-									<span>
-										&nbsp;· Updated <FormattedDate date={updatedDate} />
-									</span>
-								)
-							}
-						</div>
-
-						<hr />
-					</div>
-
-					<slot />
+	<main>
+		<article>
+			{heroImage && (
+				<div class="hero-image">
+					<Image src={heroImage} alt="" />
 				</div>
-			</article>
-		</main>
+			)}
 
-		<Footer />
-	</body>
+			<div class="prose">
+				<div class="title">
+					<h1>{title}</h1>
+
+					<div class="date">
+						<FormattedDate date={pubDate} />
+
+						{
+							updatedDate && (
+								<span>
+									&nbsp;· Updated <FormattedDate date={updatedDate} />
+								</span>
+							)
+						}
+					</div>
+
+					<hr />
+				</div>
+
+				<slot />
+			</div>
+		</article>
+	</main>
+
+	<Footer />
+</body>
+```
+
 </html>
