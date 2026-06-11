@@ -14,29 +14,12 @@ const posts = (await getCollection('blog')).sort(
 <html lang="en">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+
 		<style>
 			main {
-				max-width: 760px;
+				max-width: 860px;
 				margin: 0 auto;
-				padding: 6rem 1.5rem;
-			}
-
-			.hero {
-				margin-bottom: 5rem;
-			}
-
-			h1 {
-				font-size: clamp(3.5rem, 9vw, 7rem);
-				line-height: 0.95;
-				margin: 0 0 1.5rem;
-				letter-spacing: -0.06em;
-			}
-
-			.statement {
-				font-size: clamp(1.25rem, 2vw, 1.6rem);
-				line-height: 1.7;
-				max-width: 680px;
-				color: rgb(var(--black));
+				padding: 3rem 1.5rem 6rem;
 			}
 
 			.section-label {
@@ -47,21 +30,24 @@ const posts = (await getCollection('blog')).sort(
 				margin-bottom: 2rem;
 			}
 
-			.post {
-				margin-bottom: 4rem;
+			.note-card {
+				background: #fcfcfc;
+				border: 1px solid rgba(var(--gray), 15%);
+				border-radius: 16px;
+				padding: 2rem;
+				margin-bottom: 1rem;
+				transition: all 0.2s ease;
 			}
 
-			.divider {
-				border: 0;
-				border-top: 1px solid rgba(var(--gray), 30%);
-				margin: 4rem 0;
+			.note-card:hover {
+				border-color: rgba(var(--gray), 25%);
 			}
 
 			.essay-title {
-				font-size: clamp(2rem, 4vw, 3.4rem);
-				line-height: 1.05;
+				font-size: clamp(1.8rem, 4vw, 3rem);
+				line-height: 1.08;
 				letter-spacing: -0.04em;
-				margin: 0 0 1.25rem;
+				margin: 0 0 1rem;
 			}
 
 			.essay-title a {
@@ -74,7 +60,7 @@ const posts = (await getCollection('blog')).sort(
 			}
 
 			.excerpt {
-				font-size: 1.15rem;
+				font-size: 1.05rem;
 				line-height: 1.8;
 				color: rgb(var(--gray));
 				margin-bottom: 1.5rem;
@@ -83,6 +69,7 @@ const posts = (await getCollection('blog')).sort(
 			.read-link {
 				font-size: 1rem;
 				font-weight: 600;
+				text-decoration: none;
 			}
 		</style>
 	</head>
@@ -91,36 +78,31 @@ const posts = (await getCollection('blog')).sort(
 		<Header />
 
 		<main>
-			<section class="hero">
-				<h1>NorthAxis</h1>
-
-				<p class="statement">
-					Notes on design, AI, systems thinking, and building better products.
-				</p>
-			</section>
-
 			<section>
 				<p class="section-label">Latest Notes</p>
 
 				{
-					posts.map((post, index) => (
-						<>
-							<article class="post">
-								<h2 class="essay-title">
-									<a href={`/blog/${post.slug}/`}>{post.data.title}</a>
-								</h2>
+					posts.map((post) => (
+						<article class="note-card">
+							<h2 class="essay-title">
+								<a href={`/blog/${post.slug}/`}>
+									{post.data.title}
+								</a>
+							</h2>
 
-								<p class="excerpt">{post.data.description}</p>
+							<p class="excerpt">
+								{post.data.description}
+							</p>
 
-								<p>
-									<a class="read-link" href={`/blog/${post.slug}/`}>
-										Continue Reading →
-									</a>
-								</p>
-							</article>
-
-							{index < posts.length - 1 && <hr class="divider" />}
-						</>
+							<p>
+								<a
+									class="read-link"
+									href={`/blog/${post.slug}/`}
+								>
+									Continue Reading →
+								</a>
+							</p>
+						</article>
 					))
 				}
 			</section>

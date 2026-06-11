@@ -14,23 +14,13 @@ const posts = (await getCollection('blog')).sort(
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title="Essays | NorthAxis" description={SITE_DESCRIPTION} />
+		<BaseHead title="Notes | NorthAxis" description={SITE_DESCRIPTION} />
+
 		<style>
 			main {
-				width: 720px;
-				max-width: calc(100% - 2em);
-				margin: auto;
-				padding: 3em 1em;
-			}
-
-			.page-title {
-				margin-bottom: 0.5em;
-			}
-
-			.page-description {
-				color: rgb(var(--gray));
-				font-size: 1.1em;
-				margin-bottom: 3em;
+				max-width: 860px;
+				margin: 0 auto;
+				padding: 3rem 1.5rem 6rem;
 			}
 
 			.post-list {
@@ -39,36 +29,46 @@ const posts = (await getCollection('blog')).sort(
 				margin: 0;
 			}
 
-			.post-item {
-				padding: 1.75em 0;
-				border-bottom: 1px solid rgba(var(--gray), 25%);
+			.note-card {
+				background: #fcfcfc;
+				border: 1px solid rgba(var(--gray), 15%);
+				border-radius: 16px;
+				padding: 2rem;
+				margin-bottom: 1rem;
+				transition: all 0.2s ease;
 			}
 
-			.post-item a {
+			.note-card:hover {
+				border-color: rgba(var(--gray), 25%);
+			}
+
+			.note-card a {
 				text-decoration: none;
 				color: rgb(var(--black));
 			}
 
-			.post-item a:hover h2 {
+			.note-card a:hover h2 {
 				color: rgb(var(--accent));
 			}
 
-			.post-item h2 {
-				margin: 0 0 0.4em 0;
-				font-size: 1.5em;
-				line-height: 1.25;
+			.note-card h2 {
+				margin: 0 0 0.5rem 0;
+				font-size: clamp(1.8rem, 4vw, 3rem);
+				line-height: 1.08;
+				letter-spacing: -0.04em;
 			}
 
 			.date {
-				margin: 0 0 0.75em 0;
+				margin: 0 0 0.9rem 0;
 				color: rgb(var(--gray));
-				font-size: 0.9em;
+				font-size: 0.9rem;
 			}
 
 			.description {
 				margin: 0;
 				color: rgb(var(--gray));
-				line-height: 1.6;
+				font-size: 1.05rem;
+				line-height: 1.8;
 			}
 		</style>
 	</head>
@@ -77,22 +77,21 @@ const posts = (await getCollection('blog')).sort(
 		<Header />
 
 		<main>
-			<h1 class="page-title">Notes</h1>
-			<p class="page-description">
-				Observations, questions, and frameworks on AI, systems, design, and human behavior.
-			</p>
-
 			<ul class="post-list">
 				{
 					posts.map((post) => (
-						<li class="post-item">
+						<li class="note-card">
 							<a href={`/blog/${post.id}/`}>
 								<h2>{post.data.title}</h2>
+
 								<p class="date">
 									<FormattedDate date={post.data.pubDate} />
 								</p>
+
 								{post.data.description && (
-									<p class="description">{post.data.description}</p>
+									<p class="description">
+										{post.data.description}
+									</p>
 								)}
 							</a>
 						</li>
