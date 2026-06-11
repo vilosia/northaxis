@@ -1,4 +1,5 @@
 ---
+
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
@@ -6,108 +7,112 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 import { getCollection } from 'astro:content';
 
 const posts = (await getCollection('blog')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
----
+--
 
 <!doctype html>
+
 <html lang="en">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 
-		<style>
-			main {
-				max-width: 860px;
-				margin: 0 auto;
-				padding: 3rem 1.5rem 6rem;
+```
+	<style>
+		main {
+			max-width: 860px;
+			margin: 0 auto;
+			padding: 3rem 1.5rem 6rem;
+		}
+
+		.section-label {
+			font-size: 0.85rem;
+			letter-spacing: 0.08em;
+			text-transform: uppercase;
+			color: rgb(var(--gray));
+			margin-bottom: 2rem;
+		}
+
+		.note-card {
+			background: #fcfcfc;
+			border: 1px solid rgba(var(--gray), 15%);
+			border-radius: 16px;
+			padding: 2rem;
+			margin-bottom: 1rem;
+			transition: all 0.2s ease;
+		}
+
+		.note-card:hover {
+			border-color: rgba(var(--gray), 25%);
+		}
+
+		.essay-title {
+			font-size: clamp(1.8rem, 4vw, 3rem);
+			line-height: 1.08;
+			letter-spacing: -0.04em;
+			margin: 0 0 1rem;
+		}
+
+		.essay-title a {
+			text-decoration: none;
+			color: rgb(var(--black));
+		}
+
+		.essay-title a:hover {
+			color: rgb(var(--accent));
+		}
+
+		.excerpt {
+			font-size: 1.05rem;
+			line-height: 1.8;
+			color: rgb(var(--gray));
+			margin-bottom: 1.5rem;
+		}
+
+		.read-link {
+			font-size: 1rem;
+			font-weight: 600;
+			text-decoration: none;
+		}
+	</style>
+</head>
+
+<body>
+	<Header />
+
+	<main>
+		<section>
+			<p class="section-label">Latest Notes</p>
+
+			{
+				posts.map((post) => (
+					<article class="note-card">
+						<h2 class="essay-title">
+							<a href={`/blog/${post.id}/`}>
+								{post.data.title}
+							</a>
+						</h2>
+
+						<p class="excerpt">
+							{post.data.description}
+						</p>
+
+						<p>
+							<a
+								class="read-link"
+								href={`/blog/${post.id}/`}
+							>
+								Continue Reading →
+							</a>
+						</p>
+					</article>
+				))
 			}
+		</section>
+	</main>
 
-			.section-label {
-				font-size: 0.85rem;
-				letter-spacing: 0.08em;
-				text-transform: uppercase;
-				color: rgb(var(--gray));
-				margin-bottom: 2rem;
-			}
+	<Footer />
+</body>
+```
 
-			.note-card {
-				background: #fcfcfc;
-				border: 1px solid rgba(var(--gray), 15%);
-				border-radius: 16px;
-				padding: 2rem;
-				margin-bottom: 1rem;
-				transition: all 0.2s ease;
-			}
-
-			.note-card:hover {
-				border-color: rgba(var(--gray), 25%);
-			}
-
-			.essay-title {
-				font-size: clamp(1.8rem, 4vw, 3rem);
-				line-height: 1.08;
-				letter-spacing: -0.04em;
-				margin: 0 0 1rem;
-			}
-
-			.essay-title a {
-				text-decoration: none;
-				color: rgb(var(--black));
-			}
-
-			.essay-title a:hover {
-				color: rgb(var(--accent));
-			}
-
-			.excerpt {
-				font-size: 1.05rem;
-				line-height: 1.8;
-				color: rgb(var(--gray));
-				margin-bottom: 1.5rem;
-			}
-
-			.read-link {
-				font-size: 1rem;
-				font-weight: 600;
-				text-decoration: none;
-			}
-		</style>
-	</head>
-
-	<body>
-		<Header />
-
-		<main>
-			<section>
-				<p class="section-label">Latest Notes</p>
-
-				{
-					posts.map((post) => (
-						<article class="note-card">
-							<h2 class="essay-title">
-								<a href={`/blog/${post.slug}/`}>
-									{post.data.title}
-								</a>
-							</h2>
-
-							<p class="excerpt">
-								{post.data.description}
-							</p>
-
-							<p>
-								<a
-									class="read-link"
-									href={`/blog/${post.slug}/`}
-								>
-									Continue Reading →
-								</a>
-							</p>
-						</article>
-					))
-				}
-			</section>
-		</main>
-
-		<Footer />
-	</body>
 </html>
