@@ -34,12 +34,25 @@ const getPostUrl = (post) => {
 				margin: 0 0 1.5rem;
 			}
 
+			.note-card-link {
+				display: block;
+				text-decoration: none;
+				color: inherit;
+				margin-bottom: 1.5rem;
+			}
+
 			.note-card {
 				background: #fcfcfc;
 				border: 1px solid #E9E8E8;
 				border-radius: 16px;
 				padding: 1.75rem 1.5rem;
-				margin-bottom: 1.5rem;
+				transition: border-color 0.2s ease, transform 0.2s ease;
+				cursor: pointer;
+			}
+
+			.note-card-link:hover .note-card {
+				border-color: #d8d7d7;
+				transform: translateY(-2px);
 			}
 
 			.essay-title {
@@ -47,15 +60,7 @@ const getPostUrl = (post) => {
 				line-height: 1.25;
 				letter-spacing: -0.03em;
 				margin: 0 0 0.4rem;
-			}
-
-			.essay-title a {
-				text-decoration: none;
 				color: rgb(var(--black));
-			}
-
-			.essay-title a:hover {
-				color: rgb(var(--accent));
 			}
 
 			.excerpt {
@@ -68,11 +73,12 @@ const getPostUrl = (post) => {
 			.read-link {
 				font-size: 1rem;
 				font-weight: 400;
-				text-decoration: none;
 				color: rgb(var(--black));
+				margin: 0;
 			}
 
-			.read-link:hover {
+			.note-card-link:hover .essay-title,
+			.note-card-link:hover .read-link {
 				color: rgb(var(--accent));
 			}
 		</style>
@@ -87,23 +93,21 @@ const getPostUrl = (post) => {
 
 				{
 					posts.map((post) => (
-						<article class="note-card">
-							<h2 class="essay-title">
-								<a href={getPostUrl(post)}>
+						<a href={getPostUrl(post)} class="note-card-link">
+							<article class="note-card">
+								<h2 class="essay-title">
 									{post.data.title}
-								</a>
-							</h2>
+								</h2>
 
-							<p class="excerpt">
-								{post.data.description}
-							</p>
+								<p class="excerpt">
+									{post.data.description}
+								</p>
 
-							<p>
-								<a class="read-link" href={getPostUrl(post)}>
+								<p class="read-link">
 									Continue Reading →
-								</a>
-							</p>
-						</article>
+								</p>
+							</article>
+						</a>
 					))
 				}
 			</section>
